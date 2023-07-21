@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import WorkExperience from "../Component/WorkExperience";
 
 function App(){
-return
+return(<WorkExperience />); 
 }
 
 export default App;
