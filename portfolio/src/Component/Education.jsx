@@ -30,7 +30,7 @@ function Education(props){
     }
 
     return(
-        <div>
+        <div className="educationForm">
             <input name="institute" onChange={handleEducationChange} value={educationEntry.institute} placeholder="Institute" />
             <input name="marks" onChange={handleEducationChange} value={educationEntry.marks} placeholder="Marks" />
             <input name="university" onChange={handleEducationChange} value={educationEntry.university} placeholder="University" />

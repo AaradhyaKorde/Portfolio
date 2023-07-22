@@ -2,7 +2,7 @@ import React from "react";
 
 function EducationEntry(props){
  return (
-    <div>
+    <div className="educationEntry">
         <h2>{props.institute}</h2>
         <h3>{props.marks}</h3>
         <h2>{props.university}</h2>

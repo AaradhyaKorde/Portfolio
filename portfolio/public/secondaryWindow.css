@@ -1,0 +1,8 @@
+.secondaryWindow{
+    height: 50%;
+    width: 50%;
+    align-self: center;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+}
