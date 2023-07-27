@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import EducationEntry from "./EducationEntry";
+import axios from "axios";
 
-function Education(props){
+
+function Education(){
 
     const [educationEntry, setEducationEntry] = useState({
         institute: "",
-        marks: "",
         university: "",
         course: "",
-        duration: ""
+        duration: "",
+        marks: ""
     })
 
     function handleEducationChange(event){
@@ -24,19 +25,34 @@ function Education(props){
 
     function submitEducationEntry(event){
 
-        props.onAddEducationEntry(educationEntry)
-
         event.preventDefault();
-    }
+
+        axios.post("http://localhost:3001/api/saveEducationPortfolio",educationEntry)
+            .then((res) => {
+                console.log('Data saved successfully:', res.data);
+                setEducationEntry({
+                institute: "",
+                university: "",
+                course: "",
+                duration: "",
+            marks: ""
+            });
+        })
+        .catch((error) => {
+            console.error('Error saving data:', error);
+          });;
+    };
 
     return(
         <div className="educationForm">
+            <form action="" onSubmit={submitEducationEntry}>
             <input name="institute" onChange={handleEducationChange} value={educationEntry.institute} placeholder="Institute" />
-            <input name="marks" onChange={handleEducationChange} value={educationEntry.marks} placeholder="Marks" />
             <input name="university" onChange={handleEducationChange} value={educationEntry.university} placeholder="University" />
             <input name="course" onChange={handleEducationChange} value={educationEntry.course} placeholder="Course" />
             <input name="duration" onChange={handleEducationChange} value={educationEntry.duration} placeholder="Duration" />
-            <button onClick={submitEducationEntry}>Add</button>
+            <input name="marks" onChange={handleEducationChange} value={educationEntry.marks} placeholder="Marks" />
+            <button  type="submit" >Add</button>
+            </form>
         </div>
     );
 }
