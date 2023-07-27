@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 
-function Education(){
+function Education(props){
 
     const [educationEntry, setEducationEntry] = useState({
         institute: "",
@@ -26,6 +26,8 @@ function Education(){
     function submitEducationEntry(event){
 
         event.preventDefault();
+
+        props.onAddEducationEntry(educationEntry);
 
         axios.post("http://localhost:3001/api/saveEducationPortfolio",educationEntry)
             .then((res) => {
