@@ -2,8 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-const app = express();
+const cors = require('cors');
 
+
+
+
+const app = express();
+app.use(cors());
 const path = require('path');
 
 // Serve static files from the "public" directory
@@ -15,7 +20,7 @@ app.use(bodyParser.json());
 
 //Database
 
-mongoose.connect("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.9.0/portfolioDB", {useNewUrlParser: true, useUnifiedTopology: true})//changing url for db
+mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB", {useNewUrlParser: true, useUnifiedTopology: true})//changing url for db
     .then( () => console.log("ConnectedToMongoDB"))
     .catch((err) => console.error(err));
 
@@ -55,6 +60,17 @@ app.post("/api/saveEducationPortfolio", (req, res) => {
 
         });
 });
+
+app.get("/api/getEducationEntries", (req, res) => {
+    EducationPortfolio.find({})
+      .then((educationEntries) => {
+        res.json(educationEntries);
+      })
+      .catch((err) => {
+        console.error("Error fetching education entries from database:", err);
+        res.status(500).json({ error: "An error occurred" });
+      });
+  });
 
 app.listen(3001, function() {
     console.log("Server started on port 3001");

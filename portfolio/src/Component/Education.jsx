@@ -35,7 +35,7 @@ function Education(){
                 university: "",
                 course: "",
                 duration: "",
-            marks: ""
+                marks: ""
             });
         })
         .catch((error) => {
